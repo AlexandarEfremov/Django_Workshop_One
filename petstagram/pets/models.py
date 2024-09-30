@@ -22,7 +22,13 @@ class Pet(models.Model):
     #then we call the super() so the changes can be pushe dto our DB
     #if we call it earlier then it will save the current changes and bypass the rest
     #of the logic
+
     def save(self, *args, **kwargs):
         if not self.slug :
             self.slug = slugify(f"{self.name}-{self.id}")
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
+
+
